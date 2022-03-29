@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ARM4Component : WeaponComponent
 {
-    // Start is called before the first frame update
+    Vector3 hitLocation;
     void Start()
     {
 
@@ -18,7 +18,7 @@ public class ARM4Component : WeaponComponent
 
     protected override void FireWeapon()
     {
-        Vector3 hitLocation;
+      
         if (weaponStats.bulletsInClip > 0 && !isReloading && !WeaponHolder.playerController.isRunning)
         {
             base.FireWeapon();
@@ -30,6 +30,9 @@ public class ARM4Component : WeaponComponent
             if (Physics.Raycast(screenRay, out RaycastHit hit, weaponStats.fireDistance, weaponStats.weaponHitLayer))
             {
                 hitLocation = hit.point;
+
+                DealDamage(hit); 
+
                 Vector3 hitDirection = hit.point - MainCamera.transform.position;
                 Debug.DrawRay(MainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red, 1f);
             }
@@ -39,5 +42,17 @@ public class ARM4Component : WeaponComponent
         {
             WeaponHolder.StartReloading();
         }
+    }
+
+    void DealDamage(RaycastHit hitInfo)
+    {
+        IDamageable damageable = hitInfo.collider.GetComponent<IDamageable>();
+        damageable?.TakeDamage(weaponStats.damage);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(hitLocation, 0.2f);
     }
 }

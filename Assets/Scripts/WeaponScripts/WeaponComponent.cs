@@ -46,6 +46,8 @@ public class WeaponComponent : MonoBehaviour
     void Awake()
     {
         MainCamera = Camera.main;
+        firingEffect.Stop();
+
     }
 
 
@@ -106,15 +108,17 @@ public class WeaponComponent : MonoBehaviour
         //{
         //    firingEffect.Stop();
         //}
-        int bulletsToReload = weaponStats.clipSize - weaponStats.totalBullets;
-        if (bulletsToReload < 0)
+        int bulletsToReload = weaponStats.totalBullets - (weaponStats.clipSize - weaponStats.bulletsInClip);
+
+
+        if (bulletsToReload > 0)
         {
+            weaponStats.totalBullets = bulletsToReload;
             weaponStats.bulletsInClip = weaponStats.clipSize;
-            weaponStats.totalBullets -= weaponStats.clipSize;
         }
         else
         {
-            weaponStats.bulletsInClip = weaponStats.totalBullets;
+            weaponStats.bulletsInClip += weaponStats.totalBullets;
             weaponStats.totalBullets = 0;
         }
     }

@@ -7,12 +7,15 @@ public class ZombieAttackState : ZombieStates
 	GameObject followTarget;
 	float attackRange = 2;
 
+	private IDamageable damageableObject;
+
 	int movementZHash = Animator.StringToHash("MovementZ");
 	int IsAttackingHash = Animator.StringToHash("IsAttacking");
 	public ZombieAttackState(GameObject _followTarget, ZombieComponent zombie, StateMachine stateMachine) : base(zombie, stateMachine)
 	{
 		followTarget = _followTarget;
 		updateInterval = 2;
+		damageableObject = followTarget.GetComponent<IDamageable>();
 	}
 	public override void Exit()
 	{
@@ -27,7 +30,7 @@ public class ZombieAttackState : ZombieStates
 	public override void IntervalUpdate()
 	{
 		base.IntervalUpdate();
-
+		damageableObject?.TakeDamage(ownerZombie.zombieDamage);
 	}
 
 	public override void Start()
