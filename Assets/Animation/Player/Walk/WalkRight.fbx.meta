@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 05599526339dd7740a0e42a88aa95ea8
+guid: 1839f2311edfd0a48a3a083f8bf458fe
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Strafe Right
+    second: WalkRightN
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,13 +35,13 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Strafe Right
+      name: WalkRightN
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
       lastFrame: 43
       wrapMode: 0
-      orientationOffsetY: -50
+      orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
@@ -51,7 +51,7 @@ ModelImporter:
       loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
