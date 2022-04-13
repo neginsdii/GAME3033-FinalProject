@@ -57,9 +57,13 @@ public class WeaponComponent : MonoBehaviour
 
     }
 
-    public void Initialized(WeaponHolder _weaponHolder)
+    public void Initialized(WeaponHolder _weaponHolder, WeaponScriptable weaponScriptable)
     {
         WeaponHolder = _weaponHolder;
+        if (weaponScriptable)
+        {
+            weaponStats = weaponScriptable.weaponStates;
+        }
     }
 
     public virtual void StartFiringWeapon()
@@ -79,7 +83,8 @@ public class WeaponComponent : MonoBehaviour
     {
         isFiring = false;
         CancelInvoke(nameof(FireWeapon));
-        if (firingEffect)
+
+        if (firingEffect.isPlaying)
         {
             firingEffect.Stop();
         }
@@ -97,7 +102,7 @@ public class WeaponComponent : MonoBehaviour
     public virtual void StopReloading()
     {
         isReloading = false;
-        if (firingEffect)
+        if (firingEffect.isPlaying)
         {
             firingEffect.Stop();
         }

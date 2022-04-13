@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AppEvents : MonoBehaviour
 {
-    public delegate void MouseCursorEnable(bool enabled);
+    public delegate void OnMouseCursorEnable(bool enabled);
 
-    public static event MouseCursorEnable MouseCursorEnabled;
+    public static event OnMouseCursorEnable MouseCursorEnabled;
+
 
     public static void InvokeMouseCursorEnable(bool enabled)
     {

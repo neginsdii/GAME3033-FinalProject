@@ -10,20 +10,20 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private GameHUDWidget InventoryCanvas;
 
     private GameHUDWidget ActiveWidget;
-
+    public GameHUDWidget GetActiveWidget => ActiveWidget;
     private void Start()
     {
         DisableAllMenus();
         EnableGameMenu();
     }
 
-    public void EnablePauseMenu()
-    {
-        if (ActiveWidget) ActiveWidget.DisableWidget();
-       
-        //ActiveWidget = PauseCanvas;
-        ActiveWidget.EnableWidget();
-    }
+    //public void EnablePauseMenu()
+    //{
+    //	if (ActiveWidget) ActiveWidget.DisableWidget();
+
+    //	ActiveWidget = PauseCanvas;
+    //	ActiveWidget.EnableWidget();
+    //}
 
     public void EnableGameMenu()
     {
@@ -32,7 +32,6 @@ public class GameUIController : MonoBehaviour
         ActiveWidget = GameCanvas;
         ActiveWidget.EnableWidget();
     }
-
     public void EnableInventoryMenu()
     {
         if (ActiveWidget) ActiveWidget.DisableWidget();
@@ -40,10 +39,21 @@ public class GameUIController : MonoBehaviour
         ActiveWidget = InventoryCanvas;
         ActiveWidget.EnableWidget();
     }
+    public void ToggleInventory(bool inventoryOn)
+    {
+        if (inventoryOn)
+        {
+            EnableInventoryMenu();
+        }
+        else
+        {
+            EnableGameMenu();
+        }
 
+    }
     public void DisableAllMenus()
     {
-        GameCanvas.DisableWidget();
+        //GameCanvas.DisableWidget();
         //PauseCanvas.DisableWidget();
         InventoryCanvas.DisableWidget();
     }
