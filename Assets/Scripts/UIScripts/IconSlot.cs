@@ -14,11 +14,13 @@ public class IconSlot : MonoBehaviour
 
     [SerializeField] private ItemSlotAmountCanvas AmountWidget;
     [SerializeField] private ItemSlotEquippedCanvas EquippedWidget;
-
+    [SerializeField] private Image icon;
+    private AudioSource audioSource;
     void Awake()
     {
         ItemButton = GetComponent<Button>();
         ItemText = GetComponentInChildren<TMP_Text>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Initialize(ItemScript item)
@@ -27,7 +29,7 @@ public class IconSlot : MonoBehaviour
         ItemText.text = Item.name;
         AmountWidget.Initialize(item);
         EquippedWidget.Initialize(item);
-
+        icon.sprite = item.icon.sprite;
         ItemButton.onClick.AddListener(UseItem);
         Item.OnItemDestroyed += OnItemDestroyed;
     }
@@ -36,6 +38,8 @@ public class IconSlot : MonoBehaviour
     {
         Debug.Log($"{Item.name} used!");
         Item.UseItem(Item.controller);
+        if (!audioSource.isPlaying)
+            audioSource.Play();
     }
 
     private void OnItemDestroyed()

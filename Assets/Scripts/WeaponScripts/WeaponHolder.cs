@@ -29,19 +29,26 @@ public class WeaponHolder : MonoBehaviour
     private WeaponScriptable startWeapon;
     GameObject spawnedWeapon;
     [SerializeField]
- //   private WeaponAmmoUI weaponAmmoUI;
+    private WeaponAmmoUI weaponAmmoUI;
+    public Dictionary<WeaponType, WeaponStats> weaponAmmoDictionary;
+
+    private AudioSource audioSource;
     void Start()
     {
         playerController = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
         playerController.inventory.AddItem(startWeapon, 1);
-        startWeapon.UseItem(playerController);
-       // GameObject spawnWeapon = Instantiate(weaponToSpawn, WeaponSocket.transform.position, WeaponSocket.transform.rotation, WeaponSocket.transform);
+        //startWeapon.UseItem(playerController);
+        weaponAmmoDictionary = new Dictionary<WeaponType, WeaponStats>();
+        weaponAmmoDictionary.Add(startWeapon.weaponStates.weaponType, startWeapon.weaponStates);
+        // GameObject spawnWeapon = Instantiate(weaponToSpawn, WeaponSocket.transform.position, WeaponSocket.transform.rotation, WeaponSocket.transform);
 
-      //  equippedWeapon = spawnWeapon.GetComponent<WeaponComponent>();
-      //  equippedWeapon.Initialized(this);
-       //   PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
-     //   GripSocketLocation = equippedWeapon.gripLoction;
+        //  equippedWeapon = spawnWeapon.GetComponent<WeaponComponent>();
+        //  equippedWeapon.Initialized(this);
+        //   PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
+        //   GripSocketLocation = equippedWeapon.gripLoction;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -85,6 +92,7 @@ public class WeaponHolder : MonoBehaviour
         playerController.isFiring = true;
         animator.SetBool(isFiringHash, true);
         equippedWeapon.StartFiringWeapon();
+            audioSource.Play();
     }
 
     public void StopFiring()
@@ -94,6 +102,7 @@ public class WeaponHolder : MonoBehaviour
         playerController.isFiring = false;
         animator.SetBool(isFiringHash, false);
         equippedWeapon.StopFiringWeapon();
+        audioSource.Stop();
     }
     public void OnReload(InputValue value)
     {
@@ -113,6 +122,7 @@ public class WeaponHolder : MonoBehaviour
         if (equippedWeapon.weaponStats.totalBullets <= 0) return;
         animator.SetBool(isReloadingHash, true);
         equippedWeapon.StartReloading();
+        weaponAmmoDictionary[equippedWeapon.weaponStats.weaponType] = equippedWeapon.weaponStats;
 
         InvokeRepeating(nameof(StopReloading), 0, 0.1f);
 
@@ -123,7 +133,7 @@ public class WeaponHolder : MonoBehaviour
     {
         if (!equippedWeapon) return;
 
-        if (animator.GetBool(isReloadingHash)) return;
+        if (!animator.GetBool(isReloadingHash)) return;
 
         playerController.isReloading = false;
         equippedWeapon.StopReloading();
@@ -143,15 +153,25 @@ public class WeaponHolder : MonoBehaviour
         equippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
 
         if (!equippedWeapon) return;
-        Debug.Log("Weapon Stats: " + equippedWeapon.weaponStats.weaponName);
 
         equippedWeapon.Initialized(this, weaponScriptable);
+        if (weaponAmmoDictionary.ContainsKey(equippedWeapon.weaponStats.weaponType))
+        {
+            equippedWeapon.weaponStats = weaponAmmoDictionary[equippedWeapon.weaponStats.weaponType];
+        }
         PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
     }
+
+  
 
     public void UnquipWeapon()
     {
         if (!equippedWeapon) return;
+        if (weaponAmmoDictionary.ContainsKey(equippedWeapon.weaponStats.weaponType))
+        {
+            weaponAmmoDictionary[equippedWeapon.weaponStats.weaponType] = equippedWeapon.weaponStats;
+        }
+
         Destroy(equippedWeapon.gameObject);
         equippedWeapon = null;
     }

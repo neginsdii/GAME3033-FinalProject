@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
             healthComponent = GetComponent<HealthComponent>();
         }
 
-
+        Cursor.lockState = CursorLockMode.Confined;
     }
     public void OnInventory(InputValue value)
     {

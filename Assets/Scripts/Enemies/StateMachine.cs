@@ -21,10 +21,10 @@ public class StateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isRunning)
-		{
+       // if(isRunning)
+		//{
             currentState.Update();
-		}
+		//}
     }
 
     public void Initialize(ZombieStateType startingState)

@@ -35,4 +35,12 @@ public class HealthComponent : MonoBehaviour,IDamageable
 		}	
 	}
 
+	public virtual void Heal(float healValue)
+	{
+		if (CurrentHealth < MaxHealth)
+		{
+			CurrentHealth = Mathf.Clamp(CurrentHealth + healValue, 0, MaxHealth);
+		}
+	}
+
 }

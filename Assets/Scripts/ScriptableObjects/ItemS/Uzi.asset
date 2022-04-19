@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f81a772f92e7834ba4975cecf210fc1, type: 3}
+  m_Name: Uzi
+  m_EditorClassIdentifier: 
+  name: Uzi
+  itemCategory: 1
+  itemPrefab: {fileID: 2241366126210964382, guid: f46b543bac7af3b4daadb14f48440cf1, type: 3}
+  isStackable: 0
+  maxSize: 1
+  icon: {fileID: 5899247598127804869, guid: 6d038f8b59e7ac34aa8d9c20b351f025, type: 3}
+  amountValue: 100
+  weaponStates:
+    weaponType: 2
+    weaponName: Uzi
+    damage: 20
+    bulletsInClip: 30
+    clipSize: 30
+    totalBullets: 200
+    fireStartDelay: 0
+    fireRate: 0.125
+    fireDistance: 1000
+    Repeating: 1
+    weaponHitLayer:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    WeaponFiringPattern: 1

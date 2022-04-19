@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthComponent : HealthComponent
 {
@@ -8,5 +9,12 @@ public class PlayerHealthComponent : HealthComponent
     {
         base.Start();
         PlayerEvents.Invoke_OnHealthInitialized(this);
+    }
+
+    public override void Destroy()
+    {
+        Data.endGameText = "You Died";
+
+        SceneManager.LoadScene("EndScene");
     }
 }

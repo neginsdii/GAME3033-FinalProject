@@ -11,7 +11,7 @@ public class ZombieFollowState : ZombieStates
 	public ZombieFollowState(GameObject _followTarget, ZombieComponent zombie, StateMachine stateMachine) : base(zombie, stateMachine)
 	{
 		FollowTarget = _followTarget;
-		updateInterval = 2;
+		updateInterval = Random.Range(4, 10);
 	}
 	public override void Exit()
 	{
@@ -46,6 +46,10 @@ public class ZombieFollowState : ZombieStates
 		if(DistanceBetween<StoppingDistance)
 		{
 			stateMachine.Changestate(ZombieStateType.Attacking);
+		}
+		if (FollowTarget == null)
+		{
+			stateMachine.Changestate(ZombieStateType.Idle);
 		}
 
 	}

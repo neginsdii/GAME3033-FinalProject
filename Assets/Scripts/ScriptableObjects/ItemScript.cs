@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public enum ItemCategory
 {
     NONE,
@@ -17,6 +17,7 @@ public abstract class ItemScript : ScriptableObject
     public GameObject itemPrefab;
     public bool isStackable;
     public int maxSize = 1;
+    public Image icon;
 
     public delegate void AmountChange();
     public event AmountChange OnAmountChange;
@@ -42,6 +43,7 @@ public abstract class ItemScript : ScriptableObject
     {
         OnItemDestroyed?.Invoke();
         // delete item from inventory system here
+        playerController.inventory.DeleteItem(this);
     }
 
     public virtual void DropItem(PlayerController playerController)

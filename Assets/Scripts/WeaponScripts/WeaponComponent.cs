@@ -109,11 +109,11 @@ public class WeaponComponent : MonoBehaviour
     }
     protected virtual void ReloeadWeapon()
     {
-        //if (firingEffect.isPlaying)
-        //{
-        //    firingEffect.Stop();
-        //}
-        int bulletsToReload = weaponStats.totalBullets - (weaponStats.clipSize - weaponStats.bulletsInClip);
+		if (firingEffect.isPlaying)
+		{
+			firingEffect.Stop();
+		}
+		int bulletsToReload = weaponStats.totalBullets - (weaponStats.clipSize - weaponStats.bulletsInClip);
 
 
         if (bulletsToReload > 0)

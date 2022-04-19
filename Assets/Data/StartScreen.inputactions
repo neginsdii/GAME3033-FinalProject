@@ -1,0 +1,33 @@
+{
+    "name": "StartScreen",
+    "maps": [
+        {
+            "name": "StartSceen",
+            "id": "22106cd5-4891-44a2-91d3-36b6f6a8e0e5",
+            "actions": [
+                {
+                    "name": "LoadMainMenu",
+                    "type": "Button",
+                    "id": "b44e3e30-ecfc-4b3f-bb2f-ce5b472b3192",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d24bd4f5-981c-44a1-85f2-92c7d1f8e47c",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LoadMainMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
